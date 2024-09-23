@@ -15,7 +15,7 @@ import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import BiotechIcon from "@mui/icons-material/Biotech";
 import { useNavigate } from "react-router-dom";
-
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 const Navbar = () => {
   const navigate = useNavigate();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -55,7 +55,32 @@ const Navbar = () => {
   const handleNavigation = (path) => {
     navigate(path);
   };
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const options = [
+    "None",
+    "Atria",
+    "Callisto",
+    "Dione",
+    "Ganymede",
+    "Hangouts Call",
+    "Luna",
+    "Oberon",
+    "Phobos",
+    "Pyxis",
+    "Sedna",
+    "Titania",
+    "Triton",
+    "Umbriel",
+  ];
 
+  const ITEM_HEIGHT = 48;
   return (
     <Box
       sx={{
@@ -72,7 +97,44 @@ const Navbar = () => {
           {/* Menu Icon for Mobile View */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             {/* Logo and Title */}
-            <MenuIcon />
+            <IconButton
+              aria-label="more"
+              id="long-button"
+              aria-controls={open ? "long-menu" : undefined}
+              aria-expanded={open ? "true" : undefined}
+              aria-haspopup="true"
+              sx={{ color: "white" }}
+              onClick={handleClick}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="long-menu"
+              MenuListProps={{
+                "aria-labelledby": "long-button",
+              }}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              slotProps={{
+                paper: {
+                  style: {
+                    maxHeight: ITEM_HEIGHT * 9,
+                    width: "20ch",
+                  },
+                },
+              }}
+            >
+              {options.map((option) => (
+                <MenuItem
+                  key={option}
+                  selected={option === "Pyxis"}
+                  onClick={handleClose}
+                >
+                  {option}
+                </MenuItem>
+              ))}
+            </Menu>
             <Typography
               variant="h6"
               component="div"
@@ -89,7 +151,7 @@ const Navbar = () => {
               color="inherit"
               sx={{ mx: 1 }}
               startIcon={<BiotechIcon />}
-              onClick={() => handleNavigation("/chuyennganh/:id")}
+              onClick={() => handleNavigation("/chuyenkhoa/:id")}
             >
               Chuyên Khoa
             </Button>
@@ -97,6 +159,7 @@ const Navbar = () => {
               color="inherit"
               sx={{ mx: 1 }}
               startIcon={<LocalHospitalIcon />}
+              onClick={() => handleNavigation("/Cosoyte/:id")}
             >
               Cơ sở y tế
             </Button>
@@ -104,6 +167,7 @@ const Navbar = () => {
               color="inherit"
               sx={{ mx: 1 }}
               startIcon={<HealthAndSafetyIcon />}
+              onClick={() => handleNavigation("/danhsachbacsi/:id")}
             >
               Bác sĩ
             </Button>
@@ -112,7 +176,7 @@ const Navbar = () => {
               sx={{ mx: 1 }}
               startIcon={<InventoryIcon />}
             >
-              Gói Khám
+              Đặt lịch
             </Button>
           </Box>
 

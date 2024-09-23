@@ -6,6 +6,8 @@ import Login from "./Components/Pages/Login/Login.jsx";
 import Register from "./Components/Pages/Register/Register.jsx";
 import Homepage from "./Components/containers/HomePage/Homepage.jsx";
 import Specialty from "./Components/Pages/Specialty/specialty.jsx";
+import MedicalFacility from "./Components/Pages/MedicalFacility/MedicalFacility.jsx";
+import DoctorList from "./Components/Pages/Doctorlist/Doctorlist.jsx";
 function App() {
   return (
     <Router>
@@ -29,7 +31,9 @@ function App() {
         {/* Trang đăng ký */}
         <Route path="/Dangky" element={<Register />} />
         {/* Trang nội dung */}
-        <Route path="/chuyennganh/:id" element={<Specialty />} />
+        <Route path="/chuyenkhoa/:id" element={<Specialty />} />
+        <Route path="/Cosoyte/:id" element={<MedicalFacility />} />
+        <Route path="/danhsachbacsi/:id" element={<DoctorList />} />
       </Routes>
 
       {/* Footer sẽ luôn hiển thị */}
